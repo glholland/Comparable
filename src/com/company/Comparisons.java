@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Comparisons {
-    public String a, b, c;
-    public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    String input1, input2, input3;
 
+    public static void main(String[] args) {
+    //Create scanner object to scan in the user input
+    Scanner scan = new Scanner(System.in);
+    //Create Comparable objects to hold user input
+    Comparable input1, input2, input3;
+
+    //Prompt the user for the strings and read them into the appropriate variable
     System.out.print("Please input the first string: ");
     input1 = scan.next();
     //System.out.println("");
@@ -21,28 +24,57 @@ public class Comparisons {
     input3 = scan.next();
     //System.out.println("");
 
+    //Create new Compare3 object to use for the first set of input.
     Compare3 comp;
-
+    //Initalize using the constructor accepting 3 arguments of Comparable type.
     comp = new Compare3(input1, input2, input3);
+    //Call the method 'largest' to compare the three inputs and find the largest of the three using the compareTo methods of the Comparable class.
     comp.largest();
-
+    //Print the output to the user.
     System.out.println("----------------------------------------------");
     System.out.println("The largest string is: " + comp.getLargest());
+    System.out.println("");
+
+    System.out.println("----------------------------------------------");
+    System.out.println("Now for the integers....");
+    System.out.println("");
+    //Prompt the user for inputs of integer type. We will reuse the place holder of input1, input2, and input3...
+    System.out.print("Please input the first integer: ");
+    input1 = scan.next();
+
+    System.out.print("Please input the second integer: ");
+    input2 = scan.next();
+
+    System.out.print("Please input the third integer: ");
+    input3 = scan.next();
+
+    //Create and initialize new Compare3 object with the new inputs.
+    Compare3 compInt = new Compare3(input1, input2, input3);
+    //Call the largest method and calculate the largest input of the three.
+    compInt.largest();
+    //Print out put to use using the method 'getLargest' inline, return type is Comparable.
+    System.out.println("----------------------------------------------");
+    System.out.println("The largest integer is: " + compInt.getLargest());
+    System.out.println("");
 
     }
 
     private static class Compare3{
+        //Creates variables to place args
         Comparable comp1, comp2, comp3;
+        //Create and initialize largest, initialization is needed so the first compareTo() doesn't attempt to compare to a null value.
         Comparable largest = "";
-        // <0 means arg is larger, ==0 means ==, >0 means arg is smaller
-        //Constructor accepting 3 Comparable objects
+        // compareTo Cheatsheet -->   < 0 means arg is larger, == 0 means equal, > 0 means arg is smaller.
+        //Constructor accepting 3 Comparable types
         Compare3(Comparable a, Comparable b, Comparable c){
+            //Set the args to internal variables
             comp1 = a;
             comp2 = b;
             comp3 = c;
         }
 
         private void largest(){
+            //given the set size, this is the simplest way to compare 3 objects IMHO.
             if (comp1.compareTo(largest) > 0){
                 largest = comp1;
             }
@@ -53,7 +85,7 @@ public class Comparisons {
                 largest = comp3;
             }
         }
-
+        //You won't believe what this method does.
         private Comparable getLargest(){
          return largest;
         }
